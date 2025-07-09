@@ -24,6 +24,7 @@ const Login = () => {
                           :  <p className='login-toggle'>Don't have an account <span onClick={() => setCurrState("Sign up")}>Click here</span> </p> }
               </div>
           </form>
+          <h1 style={{color:"red"}}>1:23:40 sec tak dek liya hai</h1>
     </div>
   )
 }
