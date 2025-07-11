@@ -1,18 +1,23 @@
 import { initializeApp } from "firebase/app";
 import { toast } from "react-toastify";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
+import { doc, getFirestore, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDnjmT8QhJKSP9D0Hju8GcSjNXXGMMPQzA",
-  authDomain: "chat-app-gs-5a226.firebaseapp.com",
-  projectId: "chat-app-gs-5a226",
-  storageBucket: "chat-app-gs-5a226.firebasestorage.app",
-  messagingSenderId: "752088537171",
-  appId: "1:752088537171:web:854649c25d13a183c6cea6",
+  apiKey: "AIzaSyCEmsYhSHCk128yj5ES4YqdyH1H75-NOuM",
+  authDomain: "chat-app-gs-d794d.firebaseapp.com",
+  projectId: "chat-app-gs-d794d",
+  storageBucket: "chat-app-gs-d794d.firebasestorage.app",
+  messagingSenderId: "164527775077",
+  appId: "1:164527775077:web:4a017c1bc1336752d6d58c",
 };
 
-//initialize firebase
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -40,23 +45,21 @@ const signup = async (username, email, password) => {
 };
 
 const login = async (email, password) => {
-    try {
-        await signInWithEmailAndPassword(auth,email,password)
-    } catch (error) {
-        console.error(error)
-        toast.error(error.code.split('/')[1].split('-').join(" "));
-    }
-}
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+  } catch (error) {
+    console.error(error);
+    toast.error(error.code.split("/")[1].split("-").join(" "));
+  }
+};
 
 const logout = async () => {
-    try {
-        await signOut(auth)
-    } catch (error) {
-        console.error(error);
-        toast.error(error.code.split("/")[1].split("-").join(" "));
-    }
-}
+  try {
+    await signOut(auth);
+  } catch (error) {
+    console.error(error);
+    toast.error(error.code.split("/")[1].split("-").join(" "));
+  }
+};
 
-export { signup, login, logout,auth,db };
-
-// const app = initializeApp(firebaseConfig);
+export { signup, login, logout, auth, db };
