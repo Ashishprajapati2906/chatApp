@@ -14,12 +14,10 @@ const ProfileUpdate = () => {
   const navigate = useNavigate()
 
   const [image, setImage] = useState(false)
-  // console.log("image kya aa rhe hai", image);
 
   const [name, setName] = useState("")
   const [bio, setBio] = useState("")
   const [uid, setUid] = useState("")
-  // console.log("uid kya hai", uid);
 
   const [prevImage, setPrevImage] = useState("")
   const { setUserData } = useContext(AppContext)
@@ -62,8 +60,6 @@ const ProfileUpdate = () => {
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
-      // console.log("user", user);
-
       if (user) {
         setUid(user.uid)
         const docRef = doc(db, "users", user.uid)
