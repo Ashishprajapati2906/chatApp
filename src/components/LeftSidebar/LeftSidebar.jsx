@@ -9,7 +9,7 @@ import { toast } from 'react-toastify'
 
 const LeftSidebar = () => {
   const navigate = useNavigate()
-  const { userData, chatData } = useContext(AppContext)  
+  const { userData, chatData } = useContext(AppContext)
   const [user, setUser] = useState(null)
   const [showSearch, setShowSearch] = useState(false)
 
@@ -23,7 +23,7 @@ const LeftSidebar = () => {
         const querySnap = await getDocs(q)
         if (!querySnap.empty && querySnap.docs[0].data().id !== userData.id) {
           // console.log(querySnap.docs[0].data());
-          
+
           let userExist = false
           chatData?.map((user) => {
             if (user.rId === querySnap.docs[0]?.data().id) {
@@ -47,7 +47,7 @@ const LeftSidebar = () => {
     }
   }
 
-  const addChat = async () => { 
+  const addChat = async () => {
     const messagesRef = collection(db, "messages");
     const chatsRef = collection(db, 'chats')
     try {
@@ -55,7 +55,7 @@ const LeftSidebar = () => {
 
       await setDoc(newMessageRef, {
         createAt: serverTimestamp(),
-        messages:[]
+        messages: []
       })
 
       await updateDoc(doc(chatsRef, user.id), {
@@ -64,7 +64,7 @@ const LeftSidebar = () => {
           lateMessage: "",
           rId: userData.id,
           updatedAt: Date.now(),
-          messageSeen:true
+          messageSeen: true
         })
       })
 
@@ -82,8 +82,13 @@ const LeftSidebar = () => {
     } catch (error) {
       toast.error(error.message)
       console.error(error);
-      
+
     }
+  }
+
+  const setChat = async (item) => {
+    console.log(item);
+uuuuu
   }
 
   return (
@@ -112,7 +117,7 @@ const LeftSidebar = () => {
             <p>{user.name}</p>
           </div>
           : chatData?.map((item, index) => (
-            <div key={index} className="friends">
+            <div onClick={() => setChat(item)} key={index} className="friends">
               <img src={item.userData.avatar} alt="" />
               <div>
                 <p>{item.userData.name}</p>
