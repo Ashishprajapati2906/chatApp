@@ -90,7 +90,8 @@ const ChatBox = () => {
                     <div key={index} className={msg.sId === userData.id ? "s-msg" : "r-msg"}>
                         <p className="msg">{msg.text}</p>
                         <div>
-                            <img src={assets.profile_img} alt="" />
+                            {/* <img src={assets.profile_img} alt="" /> */}
+                            <img src={msg.sId === userData.id ? assets.profile_img : assets.pic2} alt="" />
                             <p>{convertTimesTemp(msg.createdAt) }</p>
                         </div>
                     </div>
