@@ -103,3 +103,8 @@
 .menu:hover .sub-menu{
     display: block;
 }
+
+
+.friend-name p{
+  font-size: 20px;
+}

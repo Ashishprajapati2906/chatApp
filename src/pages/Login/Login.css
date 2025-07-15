@@ -1,4 +1,4 @@
-.login{
+/* .login{
     min-height: 100vh;
     background: url(/background.png) no-repeat;
     background-size: cover;
@@ -54,4 +54,129 @@
     font-weight: 500;
     color: #077EFF;
     cursor: pointer;
+} */
+
+.login {
+    min-height: 100vh;
+    background: url(/background.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.login .logo {
+    width: clamp(150px, 20vh, 200px); /* responsive width */
+    max-width: 100%;
+}
+
+.login-form {
+    background: white;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.login-form h2 {
+    font-weight: 500;
+    font-size: 24px;
+    text-align: center;
+}
+
+.form-input {
+    padding: 10px;
+    border: 1px solid #c9c9c9;
+    border-radius: 4px;
+    outline-color: #077EFF;
+    font-size: 14px;
+}
+
+.login-form button {
+    padding: 12px;
+    background-color: #077EFF;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login-form button:hover {
+    background-color: #005ecb;
+}
+
+.login-term {
+    display: flex;
+    gap: 5px;
+    font-size: 12px;
+    color: #808080;
+    flex-wrap: wrap;
+}
+
+.login-forgot {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.login-toggle {
+    font-size: 13px;
+    color: #5c5c5c;
+}
+
+.login-forgot span {
+    font-weight: 500;
+    color: #077EFF;
+    cursor: pointer;
+}
+
+/* ---------- Responsive Styles ---------- */
+@media (max-width: 768px) {
+    .login {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .login .logo {
+        width: 150px;
+    }
+
+    .login-form {
+        padding: 15px 20px;
+        gap: 15px;
+        width: 90%;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-input {
+        font-size: 12px;
+    }
+
+    .login-form h2 {
+        font-size: 20px;
+    }
+
+    .login-form button {
+        font-size: 14px;
+    }
+
+    .login-term {
+        font-size: 10px;
+    }
+
+    .login-toggle {
+        font-size: 11px;
+    }
 }

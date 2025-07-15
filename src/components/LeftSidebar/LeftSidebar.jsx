@@ -9,7 +9,9 @@ import { toast } from 'react-toastify'
 
 const LeftSidebar = () => {
   const navigate = useNavigate()
-  const { userData, chatData } = useContext(AppContext)
+  const { userData, chatData, chatUser, setChatUser, messagesId, setMessagesId } = useContext(AppContext)
+  // console.log("chatData", chatData);
+
   const [user, setUser] = useState(null)
   const [showSearch, setShowSearch] = useState(false)
 
@@ -61,7 +63,7 @@ const LeftSidebar = () => {
       await updateDoc(doc(chatsRef, user.id), {
         chatsData: arrayUnion({
           messageId: newMessageRef.id,
-          lateMessage: "",
+          lastMessage: "",
           rId: userData.id,
           updatedAt: Date.now(),
           messageSeen: true
@@ -71,7 +73,7 @@ const LeftSidebar = () => {
       await updateDoc(doc(chatsRef, userData.id), {
         chatsData: arrayUnion({
           messageId: newMessageRef.id,
-          lateMessage: "",
+          lastMessage: "",
           rId: user.id,
           updatedAt: Date.now(),
           messageSeen: true
@@ -87,8 +89,10 @@ const LeftSidebar = () => {
   }
 
   const setChat = async (item) => {
-    console.log(item);
-uuuuu
+    console.log("item", item);
+
+    setMessagesId(item.messageId)
+    setChatUser(item)
   }
 
   return (
@@ -118,10 +122,10 @@ uuuuu
           </div>
           : chatData?.map((item, index) => (
             <div onClick={() => setChat(item)} key={index} className="friends">
-              <img src={item.userData.avatar} alt="" />
-              <div>
+              <img src={assets.profile_img} alt="" />
+              <div className="friend-name">
                 <p>{item.userData.name}</p>
-                <span>{item.lateMessage}</span>
+                <span>{item.lastMessage}</span>
               </div>
             </div>
           ))

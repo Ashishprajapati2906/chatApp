@@ -10,7 +10,11 @@ const AppContextProvider = (props) => {
     const navigate = useNavigate()
     const [userData, setUserData] = useState(null)
     const [chatData, setChatData] = useState(null)
+    // console.log("chatData mai kya data set ho rha hai", chatData);
+
     const [messagesId, setMessagesId] = useState(null)
+    const [messages, setMessages] = useState([])
+    const [chatUser, setChatUser] = useState(null)
 
     const loadUserData = async (uid) => {
         try {
@@ -44,6 +48,8 @@ const AppContextProvider = (props) => {
             const chatRef = doc(db, 'chats', userData.id)
             const unSub = onSnapshot(chatRef, async (res) => {
                 const chatItems = res.data().chatsData;
+                // console.log("chatItems mai kya aa rha hai kkkkk", chatItems);
+
                 const tempData = []
                 for (const item of chatItems) {
                     const userRef = doc(db, 'users', item.rId)
@@ -63,7 +69,10 @@ const AppContextProvider = (props) => {
     const value = {
         userData, setUserData,
         chatData, setChatData,
-        loadUserData
+        loadUserData,
+        messages, setMessages,
+        messagesId, setMessagesId,
+        chatUser, setChatUser
     }
 
     return (
