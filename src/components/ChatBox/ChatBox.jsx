@@ -81,7 +81,7 @@ const ChatBox = () => {
         <div className="chat-box">
             <div className="chat-user">
                 <img src={chatUser.userData.avatar !== "" ? assets.profile_img : chatUser.userData.avatar} alt="no image" />
-                <p>{chatUser.userData.name} <img className='dot' src={assets.green_dot} alt="" /></p>
+                <p>{chatUser.userData.name} {Date.now() - chatUser.userData.lastSeen <= 70000 ? <img className='dot' src={assets.green_dot} alt="" /> : null}</p>
                 <img src={assets.help_icon} className='help' alt="" />
             </div>
 
@@ -92,7 +92,7 @@ const ChatBox = () => {
                         <div>
                             {/* <img src={assets.profile_img} alt="" /> */}
                             <img src={msg.sId === userData.id ? assets.profile_img : assets.pic2} alt="" />
-                            <p>{convertTimesTemp(msg.createdAt) }</p>
+                            <p>{convertTimesTemp(msg.createdAt)}</p>
                         </div>
                     </div>
                 ))}

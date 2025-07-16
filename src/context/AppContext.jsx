@@ -15,6 +15,8 @@ const AppContextProvider = (props) => {
     const [messagesId, setMessagesId] = useState(null)
     const [messages, setMessages] = useState([])
     const [chatUser, setChatUser] = useState(null)
+    // console.log("chatUser mai kya aa rha hai", chatUser);
+    
 
     const loadUserData = async (uid) => {
         try {

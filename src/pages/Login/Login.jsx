@@ -40,7 +40,7 @@ const Login = () => {
                             : <p className='login-toggle'>Don't have an account <span onClick={() => setCurrState("Sign up")}>Click here</span> </p>}
                 </div>
             </form>
-            <h1>4:16:24 tak kaam kiya hai or 4:29:22 tak dek liya hai </h1>
+            <h1>4:35:24 tak kaam kiya hai or 4:29:22 tak dek liya hai </h1>
         </div>
     )
 }
