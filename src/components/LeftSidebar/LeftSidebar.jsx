@@ -9,8 +9,8 @@ import { toast } from 'react-toastify'
 
 const LeftSidebar = () => {
   const navigate = useNavigate()
-  const { userData, chatData, chatUser, setChatUser, messagesId, setMessagesId, chatVisible, setChatVisible } = useContext(AppContext)
-  // console.log("chatData", chatData);
+  const { userData, chatData, chatUser, messages, setChatUser, messagesId, setMessagesId, chatVisible, setChatVisible } = useContext(AppContext)
+  console.log("chatData", chatData);
 
   const [user, setUser] = useState(null)
   const [showSearch, setShowSearch] = useState(false)
@@ -111,6 +111,13 @@ const LeftSidebar = () => {
 
   }
 
+  const getLastMessage = (messages, userId) => {
+    const tempMessages = messages
+      .filter(msg => msg.sId === userId);
+
+    return tempMessages.length > 0 ? tempMessages[0].text : "No message yet";
+  };
+
   return (
     <div className={`ls ${chatVisible ? "hidden" : ""}`}>
       <div className="ls-top">
@@ -121,7 +128,7 @@ const LeftSidebar = () => {
             <div className="sub-menu">
               <p onClick={() => navigate("/profile")}>Edit Profile</p>
               <hr />
-              <p onClick={()=>logout()}>Logout</p>
+              <p onClick={() => logout()}>Logout</p>
             </div>
           </div>
         </div>
@@ -141,7 +148,11 @@ const LeftSidebar = () => {
               <img src={assets.profile_img} alt="" />
               <div className="friend-name">
                 <p>{item.userData.name}</p>
-                <span>{item.lastMessage}</span>
+                <span>
+                  {
+                    getLastMessage(messages, item.userData.id)
+                  }
+                </span>
               </div>
             </div>
           ))
