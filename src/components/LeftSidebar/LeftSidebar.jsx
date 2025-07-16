@@ -2,14 +2,14 @@ import React, { useContext, useState } from 'react'
 import './LeftSidebar.css'
 import assets from '../../assets/assets'
 import { useNavigate } from 'react-router-dom'
-import { arrayUnion, collection, doc, getDocs, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore'
-import { db } from '../../config/firebase'
+import { arrayUnion, collection, doc, getDoc, getDocs, query, serverTimestamp, setDoc, updateDoc, where } from 'firebase/firestore'
+import { db, logout } from '../../config/firebase'
 import { AppContext } from '../../context/AppContext'
 import { toast } from 'react-toastify'
 
 const LeftSidebar = () => {
   const navigate = useNavigate()
-  const { userData, chatData, chatUser, setChatUser, messagesId, setMessagesId } = useContext(AppContext)
+  const { userData, chatData, chatUser, setChatUser, messagesId, setMessagesId, chatVisible, setChatVisible } = useContext(AppContext)
   // console.log("chatData", chatData);
 
   const [user, setUser] = useState(null)
@@ -90,13 +90,29 @@ const LeftSidebar = () => {
 
   const setChat = async (item) => {
     // console.log("item", item);
+    try {
 
-    setMessagesId(item.messageId)
-    setChatUser(item)
+      setMessagesId(item.messageId)
+      setChatUser(item)
+
+      const userChatsRef = doc(db, 'chats', userData.id)
+      const userChatsSnapshot = await getDoc(userChatsRef)
+      const userChatsData = userChatsSnapshot.data()
+      console.log("userChatsData", userChatsData);
+      const chatIndex = userChatsData.chatsData.findIndex((c) => c.messageId === item.messageId)
+      userChatsData.chatsData[chatIndex].messageSeen = true
+      await updateDoc(userChatsRef, {
+        chatData: userChatsData.chatsData
+      })
+      setChatVisible(true)
+    } catch (error) {
+      toast.error(error.message)
+    }
+
   }
 
   return (
-    <div className="ls">
+    <div className={`ls ${chatVisible ? "hidden" : ""}`}>
       <div className="ls-top">
         <div className="ls-nav">
           <img src={assets.logo} className='logo' alt="" />
@@ -105,7 +121,7 @@ const LeftSidebar = () => {
             <div className="sub-menu">
               <p onClick={() => navigate("/profile")}>Edit Profile</p>
               <hr />
-              <p>Logout</p>
+              <p onClick={()=>logout()}>Logout</p>
             </div>
           </div>
         </div>
