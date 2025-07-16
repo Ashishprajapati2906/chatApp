@@ -63,7 +63,7 @@ const Login = () => {
 
     return (
         <div className='login'>
-            <h1 style={{color:'white'}}>Welcome</h1>
+            {/* <h1 style={{color:'white'}}>Welcome</h1>
             <h1 style={{
                 color: '#fff',
                 textShadow: '0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff',
@@ -71,7 +71,7 @@ const Login = () => {
                 fontWeight: 'bold'
             }}>
                 Ashish Prajapati's
-            </h1>
+            </h1> */}
 
             <img src={assets.logo_big} alt="" className="logo" />
             <form onSubmit={onSubmitHandler} className='login-form'>
